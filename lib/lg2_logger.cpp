@@ -217,6 +217,7 @@ static auto extra_output_method =
 // Do_log implementation.
 void do_log(level l, const std::source_location& s, const char* m, ...)
 {
+    std::cerr << "george: do_log start...\n";
     using namespace std::string_literals;
 
     std::vector<std::string> strings{static_locs};
@@ -300,6 +301,7 @@ void do_log(level l, const std::source_location& s, const char* m, ...)
     });
 
     // Output the iovec.
+    std::cerr << "george: do_log sd_journal_sendv...\n";
     sd_journal_sendv(iov.data(), strings.size());
     extra_output_method(l, s, message);
 }
